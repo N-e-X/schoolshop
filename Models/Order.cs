@@ -15,6 +15,8 @@ namespace Shop.Models
         public int Id { get; set; }
         public string Number { get; set; }
         public List<OrderItem> Items { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
         //public Discount Discount { get; set; }
 
         private string GenerateNumber()

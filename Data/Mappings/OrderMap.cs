@@ -10,6 +10,7 @@ namespace Shop.Data.Mappings
         {
             builder.HasKey(x => x.Id);
             builder.HasMany(x => x.Items);
+            builder.HasOne(x => x.Customer).WithMany(x => x.Orders).HasForeignKey(x => x.CustomerId);
         }
     }
 }
