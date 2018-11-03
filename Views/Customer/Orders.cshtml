@@ -1,0 +1,17 @@
+﻿@model Shop.ViewModels.CustomerOrders
+
+@{
+    var title = "Orders";
+    ViewData["Title"] = title;
+}
+
+<h2>@title</h2>
+
+<h3>The list of order numbers for @Model.CustomerName</h3>
+
+<ul class="list-group">
+    @foreach (var number in Model.OrderNumbers)
+    {
+        <li class="list-group-item list-group-item-info">@number</li>
+    }
+</ul>
