@@ -48,6 +48,7 @@ function addToCart(e) {
     if (!setCartData(cartData)) { // Обновляем данные в LocalStorage
         this.disabled = false; // разблокируем кнопку после обновления LS
     }
+    openCart();
     return false;
 }
 // Устанавливаем обработчик события на каждую кнопку "Добавить в корзину"
@@ -55,7 +56,7 @@ for (var i = 0; i < itemBox.length; i++) {
     addEvent(itemBox[i].querySelector('.add_item'), 'click', addToCart);
 }
 // Открываем корзину со списком добавленных товаров
-function openCart(e) {
+function openCart() {
     var cartData = getCartData(), // вытаскиваем все данные корзины
         totalItems = '';
     // если что-то в корзине уже есть, начинаем формировать данные для вывода
@@ -76,8 +77,6 @@ function openCart(e) {
     }
     return false;
 }
-/* Открыть корзину */
-addEvent(d.getElementById('show_cart'), 'click', openCart);
 /* Очистить корзину */
 addEvent(d.getElementById('clear_cart'), 'click', function (e) {
     localStorage.removeItem('cart');
