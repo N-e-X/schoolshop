@@ -1,0 +1,48 @@
+﻿@model IEnumerable<OrderViewModel>
+
+@{
+    var title = "Orders";
+    ViewData["Title"] = title;
+}
+
+<div>
+    <h2>@title</h2>
+
+
+    <h4 style="margin: 0 auto; width: 100px;">
+        <a asp-area="" asp-controller="Orders" asp-action="Add">New order</a>
+    </h4>
+    
+    @foreach (var order in Model)
+    {
+        <div class="md-t-1">
+            <h3>Order number: @order.Number</h3>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in order.Items)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.ProductPrice</td>
+                            <td>@item.ProductCount</td>
+                            <td>@item.TotalSum</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h3>Total sum: @order.TotalSum</h3>
+
+        </div>
+    }
+</div>

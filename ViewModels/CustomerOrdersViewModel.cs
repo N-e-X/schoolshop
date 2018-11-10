@@ -3,16 +3,16 @@ using Shop.Models;
 
 namespace Shop.ViewModels
 {
-    public class CustomerOrders
+    public class CustomerOrdersViewModel
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public IEnumerable<string> OrderNumbers { get; set; }
 
-        private CustomerOrders()
+        private CustomerOrdersViewModel()
         { }
 
-        public CustomerOrders(int customerId, string customerName, IEnumerable<string> orderNumbers)
+        public CustomerOrdersViewModel(int customerId, string customerName, IEnumerable<string> orderNumbers)
         {
             CustomerId = customerId;
             CustomerName = customerName;

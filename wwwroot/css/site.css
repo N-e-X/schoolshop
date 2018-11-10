@@ -35,3 +35,7 @@ body {
         display: none;
     }
 }
+
+.md-t-1 {
+    margin-top: 10px;
+}

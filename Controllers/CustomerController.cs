@@ -38,7 +38,7 @@ namespace Shop.Controllers
                 .Select(x => x.Number)
                 .ToListAsync();
 
-            var ordersInfo = new CustomerOrders(
+            var ordersInfo = new CustomerOrdersViewModel(
                 customer.Id,
                 customer.Name,
                 orderNumbers);
