@@ -25,6 +25,7 @@ namespace Shop.Controllers
         public async Task<IActionResult> Index()
         {
             var orders = await _db.Orders
+                .OrderByDescending(x => x.Number)
                 .Include(x => x.Items)
                 .ThenInclude(x => x.Product)
                 .ToListAsync();
@@ -62,32 +63,39 @@ namespace Shop.Controllers
 
         [Route("add")]
         [HttpPost]
-        public async Task<IActionResult> Add(List<OrderItemViewModel> orderItemViewModels)
+        public async Task<IActionResult> Order([FromBody]IList<OrderItemViewModel> orderItemViewModels)
         {
 
             if (ModelState.IsValid)
             {
-                var order = new Order();
-                await _db.Orders.AddAsync(order);
+                var orderItems = new List<OrderItem>();
+                
                 foreach (var itemViewModel in orderItemViewModels)
                 {
-                    if (itemViewModel.ProductCount != 0)
+                    if (itemViewModel.ProductCount > 0)
                     {
-                        await _db.OrderItems.AddAsync(new OrderItem
+                        orderItems.Add(new OrderItem
                         {
                             ProductId = itemViewModel.ProductId,
                             Count = itemViewModel.ProductCount,
-                            OrderId = _db.Orders.Last().Id
                         });
                     }
                 }
 
+                var order = new Order(){Items = orderItems, CustomerId = 1}; // TODO: исправить создание нового объекта order (разобраться с CustomerId)
+
+                _db.Orders.Add(order);
+
                 await _db.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
-
+                
             }
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Route("cart")]
+        public IActionResult GetCart()
+        {
             return View();
         }
     }

@@ -24,14 +24,14 @@
     <tbody>
     @foreach (var item in Model) {
         <tr class="item_box">
-            <td class="item_name">
-                @item.ProductName
+            <td>
+                <span class="item_name">@item.ProductName</span>
             </td>
-            <td class="item_price">
-                @item.ProductPrice
+            <td>
+                <span class="item_price">@item.ProductPrice</span>
             </td>
-            <td class="item_count">
-                <label><input type="text" value="0"/></label>
+            <td>
+                <label class="item_count"><input type="text" value="0"/></label>
             </td>
             <td class="add_item" data-id="@item.ProductId">
                 <button >Add</button>
@@ -42,11 +42,9 @@
 </table>
 
 <div class="form-group">
-    <input type="submit" value="Clear shopping cart" id="clear_cart" class="btn btn-default" />
+    <a asp-area="" asp-controller="Orders" asp-action="GetCart">
+        <input type="submit" value="Order now" class="btn btn-success"/>
+    </a>
+    
 </div>
-
-<div class="form-group">
-    <input type="submit" value="Order now" id="order" class="btn btn-success" />
-</div>
-
-<div id="cart_content"></div>
+<div id="cart_content" hidden=""></div>

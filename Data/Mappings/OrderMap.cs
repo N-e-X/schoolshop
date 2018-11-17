@@ -9,6 +9,7 @@ namespace Shop.Data.Mappings
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Number).IsRequired();
             builder.HasMany(x => x.Items);
             builder.HasOne(x => x.Customer).WithMany(x => x.Orders).HasForeignKey(x => x.CustomerId);
         }
